@@ -18,7 +18,7 @@ def get_duration_seconds(min):
 
 
 def get_duration_min_sec(seconds):
-    min = seconds // 60
+    min = int(seconds // 60)
     sec = seconds % 60
 
     return f"{min}:{sec}" if sec >= 10 else f"{min}:0{sec}"
@@ -27,7 +27,7 @@ def get_duration_min_sec(seconds):
 def get_median(durations):
     durations.sort()
     index = len(durations)//2 + len(durations)%2
-    median = durations[index] if len(durations) % 2 == 0 else (durations[index] + durations[index+1])/2
+    median = durations[index] if len(durations) % 2 == 1 else (durations[index] + durations[index+1])/2
 
     return median
 
