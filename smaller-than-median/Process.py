@@ -42,18 +42,21 @@ def print_lower_half(lower_half):
             count += 1
             total_duration += track.duration
 
+    print()
     print(f"Total Time: <{get_duration_min_sec(total_duration)}>")
 
 
 # Initiates Data Structure that holds album and track information
 def init_db():
     file = read_file("./Albums.txt")
+
+    if not file:
+        print("File Does Not Exist. Make Sure 'Albums.txt' is in the same folder")
+
     album = None
 
     for line in file:
         if line.strip() == '':
-            album_list.append(album)
-            album = None
             continue
             
         elif line.__contains__('/') or line.strip() == '':
@@ -62,6 +65,7 @@ def init_db():
             title = tokens[1].strip()
             year = tokens[2].strip()
             album = Album(artist, title, year)
+            album_list.append(album)
             
         elif album:
             tokens = line.split('-')
@@ -79,6 +83,7 @@ def init_process():
 
     lower_half = list(map(lambda x: x.get_lower_half(median), album_list))
     print_lower_half(lower_half)
+    print(f"Median: {get_duration_min_sec(median)}")
 
 
 if __name__ == '__main__':
